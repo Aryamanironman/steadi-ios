@@ -4,11 +4,11 @@ extension Color {
     static let lime = Color(red: 0xB9/255, green: 0xE6/255, blue: 0x1A/255)
     static let limeDark = Color(red: 0x7A/255, green: 0x9A/255, blue: 0x10/255)
     static let ink = Color(red: 0x17/255, green: 0x12/255, blue: 0x21/255)
-    static let purple = Color(red: 0x2B/255, green: 0x1F/255, blue: 0x3D/255)
+    static let steadiPurple = Color(red: 0x2B/255, green: 0x1F/255, blue: 0x3D/255)
     static let cream = Color(red: 0xFA/255, green: 0xF7/255, blue: 0xF0/255)
     static let coral = Color(red: 0xFF/255, green: 0x6B/255, blue: 0x4A/255)
     static let gold = Color(red: 0xF5/255, green: 0xC5/255, blue: 0x18/255)
-    static let teal = Color(red: 0x1A/255, green: 0x9E/255, blue: 0x7A/255)
+    static let steadiTeal = Color(red: 0x1A/255, green: 0x9E/255, blue: 0x7A/255)
     static let tealDark = Color(red: 0x0E/255, green: 0x3D/255, blue: 0x2C/255)
     static let muted = Color(red: 0x5A/255, green: 0x5A/255, blue: 0x6E/255)
 }
