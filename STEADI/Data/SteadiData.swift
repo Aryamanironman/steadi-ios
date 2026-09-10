@@ -12,7 +12,7 @@ enum Severity: String, CaseIterable, Identifiable {
     }
     var color: Color {
         switch self {
-        case .mild: .teal
+        case .mild: .steadiTeal
         case .moderate: .gold
         case .elevated: .coral
         }

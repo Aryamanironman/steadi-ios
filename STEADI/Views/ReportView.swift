@@ -77,13 +77,13 @@ struct ReportView: View {
                 .background(Color.coral.opacity(0.06))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Latest (Aug 26)").font(.system(size: 11, weight: .semibold)).foregroundStyle(Color.teal)
-                    Text(r.avgSeverityEnd).font(.system(size: 28, weight: .heavy)).foregroundStyle(Color.teal)
+                    Text("Latest (Aug 26)").font(.system(size: 11, weight: .semibold)).foregroundStyle(Color.steadiTeal)
+                    Text(r.avgSeverityEnd).font(.system(size: 28, weight: .heavy)).foregroundStyle(Color.steadiTeal)
                     Text("Average tremor amplitude").font(.system(size: 10)).foregroundStyle(Color.muted)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(14)
-                .background(Color.teal.opacity(0.06))
+                .background(Color.steadiTeal.opacity(0.06))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             StabilityChart(caption: "Tremor amplitude trending down; stability trending up.")
@@ -113,7 +113,7 @@ struct ReportView: View {
                             .frame(maxWidth: .infinity, alignment: .trailing)
                         Text("\(row.stability)")
                             .font(.system(size: 12, weight: .bold))
-                            .foregroundStyle(Color.teal)
+                            .foregroundStyle(Color.steadiTeal)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                     .font(.system(size: 12))
@@ -131,7 +131,7 @@ struct ReportView: View {
                     HStack(alignment: .top, spacing: 10) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 13))
-                            .foregroundStyle(Color.teal)
+                            .foregroundStyle(Color.steadiTeal)
                             .padding(.top, 2)
                         Text(rec)
                             .font(.system(size: 13))
@@ -168,7 +168,7 @@ struct ReportView: View {
     }
 
     private func amplitudeColor(_ a: Double) -> Color {
-        a > 3 ? .coral : a > 2 ? .gold : .teal
+        a > 3 ? .coral : a > 2 ? .gold : .steadiTeal
     }
 }
 

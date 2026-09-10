@@ -57,7 +57,7 @@ struct TodayView: View {
                     .clipShape(Capsule())
                     Text("Eat with dignity.")
                         .font(.system(size: 13, weight: .medium).italic())
-                        .foregroundStyle(Color.purple)
+                        .foregroundStyle(Color.steadiPurple)
                 }
             }
         }
@@ -68,10 +68,10 @@ struct TodayView: View {
 
     private var statRow: some View {
         HStack(spacing: 10) {
-            StatCard(label: "Meals today", value: "3", icon: "fork.knife", tint: .teal)
+            StatCard(label: "Meals today", value: "3", icon: "fork.knife", tint: .steadiTeal)
             StatCard(label: "Spills", value: "1", icon: "exclamationmark.triangle", tint: .gold)
             StatCard(label: "Trend", value: "↓ 38%", icon: "arrow.down.forward", tint: .limeDark, tile: .lime.opacity(0.2))
-            StatCard(label: "Stability", value: "70", icon: "checkmark.circle", tint: .teal)
+            StatCard(label: "Stability", value: "70", icon: "checkmark.circle", tint: .steadiTeal)
         }
     }
 
@@ -84,9 +84,9 @@ struct TodayView: View {
                 HStack(spacing: 12) {
                     Text(meal.time.split(separator: ":")[0])
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(Color.purple)
+                        .foregroundStyle(Color.steadiPurple)
                         .frame(width: 40, height: 40)
-                        .background(Color.purple.opacity(0.1))
+                        .background(Color.steadiPurple.opacity(0.1))
                         .clipShape(Circle())
                     VStack(alignment: .leading, spacing: 2) {
                         HStack(spacing: 8) {

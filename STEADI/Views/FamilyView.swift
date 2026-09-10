@@ -75,7 +75,7 @@ struct FamilyView: View {
         }
         .padding(18)
         .background(
-            LinearGradient(colors: [Color.tealDark, Color.tealDark.opacity(0.82)], startPoint: .leading, endPoint: .trailing)
+            LinearGradient(colors: [Color.steadiTealDark, Color.steadiTealDark.opacity(0.82)], startPoint: .leading, endPoint: .trailing)
         )
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
@@ -85,7 +85,7 @@ struct FamilyView: View {
         HStack(spacing: 12) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 20))
-                .foregroundStyle(Color.teal)
+                .foregroundStyle(Color.steadiTeal)
             VStack(alignment: .leading, spacing: 1) {
                 Text("3 of 3 meals on her own today")
                     .font(.system(size: 15, weight: .bold))
@@ -102,10 +102,10 @@ struct FamilyView: View {
 
     private var statusCards: some View {
         HStack(spacing: 10) {
-            StatCard(label: "Last meal", value: f.lastMeal, icon: "clock", tint: .teal)
-            StatCard(label: "Battery", value: "\(f.batteryPercent)%", icon: "battery.75", tint: .teal)
+            StatCard(label: "Last meal", value: f.lastMeal, icon: "clock", tint: .steadiTeal)
+            StatCard(label: "Battery", value: "\(f.batteryPercent)%", icon: "battery.75", tint: .steadiTeal)
             StatCard(label: "7-day tremor", value: f.tremor7Day, icon: "arrow.down.forward", tint: .limeDark, tile: .lime.opacity(0.2))
-            StatCard(label: "Today's meals", value: "\(f.todayMeals)", icon: "checkmark.circle", tint: .teal)
+            StatCard(label: "Today's meals", value: "\(f.todayMeals)", icon: "checkmark.circle", tint: .steadiTeal)
         }
     }
 
@@ -125,7 +125,7 @@ struct FamilyView: View {
                         Spacer()
                         Group {
                             if day.spills == 0 {
-                                Text("No spills ✓").foregroundStyle(Color.teal)
+                                Text("No spills ✓").foregroundStyle(Color.steadiTeal)
                             } else {
                                 Text(day.spills == 1 ? "1 spill" : "\(day.spills) spills").foregroundStyle(Color.gold)
                             }
@@ -146,21 +146,21 @@ struct FamilyView: View {
     }
 
     private func severityText(_ s: Double) -> Color {
-        s > 3 ? .coral : s > 2 ? .gold : .teal
+        s > 3 ? .coral : s > 2 ? .gold : .steadiTeal
     }
 
     private var alertsCard: some View {
         SectionCard(title: "Recent alerts") {
             HStack(spacing: 10) {
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(Color.teal)
+                    .foregroundStyle(Color.steadiTeal)
                 Text("All clear — no alerts this week")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.teal)
+                    .foregroundStyle(Color.steadiTeal)
             }
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.teal.opacity(0.06))
+            .background(Color.steadiTeal.opacity(0.06))
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }

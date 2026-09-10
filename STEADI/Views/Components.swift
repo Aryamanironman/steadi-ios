@@ -19,6 +19,8 @@ struct StatCard: View {
             Text(value)
                 .font(.system(size: 22, weight: .heavy))
                 .foregroundStyle(Color.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.55)
             Text(label)
                 .font(.system(size: 11))
                 .foregroundStyle(Color.muted)
@@ -96,10 +98,10 @@ struct StabilityChart: View {
             }
             Chart(SteadiData.trend) { point in
                 LineMark(x: .value("Week", point.week), y: .value("Score", point.score))
-                    .foregroundStyle(Color.teal)
+                    .foregroundStyle(Color.steadiTeal)
                     .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
                 PointMark(x: .value("Week", point.week), y: .value("Score", point.score))
-                    .foregroundStyle(Color.teal)
+                    .foregroundStyle(Color.steadiTeal)
                     .symbolSize(30)
             }
             .chartYScale(domain: 0...80)
@@ -139,7 +141,7 @@ struct WeeklySeverityChart: View {
     }
 
     private func barColor(_ s: Double) -> Color {
-        s > 3 ? .coral : s > 2 ? .gold : .teal
+        s > 3 ? .coral : s > 2 ? .gold : .steadiTeal
     }
 }
 
@@ -148,7 +150,7 @@ struct TealDots: View {
     var body: some View {
         HStack(spacing: 4) {
             ForEach(0..<meals, id: \.self) { _ in
-                Circle().fill(Color.teal).frame(width: 10, height: 10)
+                Circle().fill(Color.steadiTeal).frame(width: 10, height: 10)
             }
         }
     }
