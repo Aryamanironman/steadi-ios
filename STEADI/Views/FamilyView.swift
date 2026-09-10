@@ -75,7 +75,7 @@ struct FamilyView: View {
         }
         .padding(18)
         .background(
-            LinearGradient(colors: [Color.steadiTealDark, Color.steadiTealDark.opacity(0.82)], startPoint: .leading, endPoint: .trailing)
+            LinearGradient(colors: [Color.tealDark, Color.tealDark.opacity(0.82)], startPoint: .leading, endPoint: .trailing)
         )
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
