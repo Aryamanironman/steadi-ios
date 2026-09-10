@@ -1,0 +1,123 @@
+# STEADI iOS — Design Spec
+
+**Date:** 2026-09-09
+**Status:** Approved by user (Approach A + independence principle; remaining decisions delegated)
+**Product:** STEADI companion-app demo for investors — native iPhone app
+**Design principle:** **Independence.** Every screen leads with "eating on her own terms", not clinical stats. Stats support the story; the story is dignity and independence.
+
+## 1. Purpose
+
+A polished, native iPhone demo of the STEADI companion app to show anyone (investors, clinicians, family). Replaces the web demo's phone-in-a-phone stage with the real thing. Front-end only — all data is bundled mock data matching the pitch deck's numbers exactly.
+
+## 2. Platform & Constraints
+
+- **SwiftUI**, minimum deployment target **iOS 17.0** (demo devices are iPhone 15/16/17 era, iOS 18+; 17.0 floor is safe and modern).
+- **Zero external dependencies** — no SPM packages, so clone-and-run needs no package resolution.
+- Charts via **Swift Charts** (native).
+- No backend, no auth, no networking. Buttons that imply server actions (Call, Message, Share, Export PDF) are present but decorative, as in the web demo.
+- **Not a git repo today** — this folder becomes a fresh git repo, pushed to GitHub (`Aryamanironman/steadi-ios`), cloned onto the Mac.
+- Xcode project uses **Xcode 16 file-system-synchronized groups** (objectVersion 77) so the `.pbxproj` stays minimal and folder edits need no project surgery. Fallback if the Mac runs older Xcode: regenerate a classic pbxproj (documented in README).
+
+## 3. Architecture
+
+Single target, 7 Swift files (app entry + theme + data + 4 view files). No view models needed for static demo data.
+
+```
+steadi-ios/
+├── STEADI.xcodeproj/
+│   └── project.pbxproj          # Xcode 16 synchronized folders
+├── STEADI/
+│   ├── STEADIApp.swift          # @main, TabView with 3 tabs
+│   ├── Info.plist               # portrait, launch screen (cream), display name
+│   ├── Theme/
+│   │   └── Brand.swift          # Color extensions (brand palette), card/badge styles
+│   ├── Data/
+│   │   └── SteadiData.swift     # mock data, ported 1:1 from web mockData.js
+│   └── Views/
+│       ├── TodayView.swift      # Tab 1 — patient (Margaret)
+│       ├── FamilyView.swift     # Tab 2 — family (Sarah watching)
+│       ├── ReportView.swift     # Tab 3 — clinician report
+│       └── Components.swift     # StatCard, SectionCard, SeverityBadge, charts
+├── Assets.xcassets/             # AppIcon (generated 1024px), AccentColor (lime)
+└── README.md                    # Mac build steps, free-provisioning notes
+```
+
+## 4. Screens
+
+### Tab 1 — "Today" (patient: Margaret Wilson, 72, Essential Tremor)
+
+Leads with independence; clinical data second.
+
+1. **Independence hero card** — large ring gauge (`Gauge`/custom arc) showing today's independence: *3 of 3 meals eaten on her own*, lime ring, delta chip "↑ 12% this week", tagline "Eat with dignity."
+2. **Stat row** (4 cards, ported from web): Meals today 3 · Spills 1 · Trend ↓ 38% · Stability 70.
+3. **Stability line chart** — 8 weeks, 34 → 70, lime line; caption "Higher score = steadier meals. Her independence has doubled in 8 weeks."
+4. **Weekly severity bar chart** — Mon–Sun, colored teal/gold/coral by severity (>3 coral, >2 gold, else teal — matching web `PatientDashboard.jsx:103`).
+5. **Today's meals list** — time badge, meal type, severity badge, items · duration · spills; chevron detail affordance (non-navigating in demo).
+
+### Tab 2 — "Family" (Sarah, monitoring her mother)
+
+Family reassurance first, data second.
+
+1. **Banner** — Margaret, "Mother · 72", status pill **"Eating independently"**, Call / Message buttons (decorative).
+2. **Independence card** — "3 of 3 meals on her own today · no assistance needed" — the tab's headline stat.
+3. **Status cards** — Last meal (Dinner · 6:00 PM, Good) · Battery 82% · 7-day tremor ↓ improving · Today's meals 3 (avg Mild).
+4. **Stability line chart** — same data, warmer caption: "Mum's independence has doubled since she started STEADI."
+5. **Weekly meals overview** — dots per meal, spills column, severity score per day.
+6. **Alerts** — "All clear — no alerts this week" (empty state; data model supports alert strings).
+
+### Tab 3 — "Report" (clinician)
+
+Independence framed as a clinical outcome.
+
+1. **Report header** — Margaret Wilson, Essential Tremor · Age 72, period Jul 8 – Aug 26 2026 (8 weeks), STEADI-001.
+2. **Independence outcomes** (new, first section) — 76% fewer spills · meals eaten unassisted · stability 34 → 70, each as a highlight metric card with independence-oriented labels ("Independence regained").
+3. **Tremor severity over time** — baseline 4.2 → latest 1.8 comparison cards + line chart.
+4. **Weekly sensor data table** — date, amplitude (colored), frequency (Hz), stability — ported from `tremorHistory`.
+5. **Clinical observations** — the 5 recommendations from `doctorReport`.
+6. **Send to doctor / Download PDF** buttons (decorative) + footer "Report generated by STEADI · Sensor data from device STEADI-001".
+
+## 5. Data
+
+`SteadiData.swift` ports `mockData.js` 1:1 — same names, same numbers: Margaret (72, ET, dx Mar 2019, STEADI-001, 82% battery), 3 meals today, weekly severity (3.2/2.8/3.5/2.4/2.1/2.6/1.9), 8-week trend (34→70), tremor history (amplitude 4.2→1.8, frequency 6.1→4.7 Hz, stability 34→70), doctor report (63 meals, 76% spill reduction, 5 recommendations). Numbers must match the pitch deck (Stedi_Pitch_Deck slide 8 uses the same 34→70 series).
+
+Independence framing is **presentation-layer only** — the hero "3 of 3 on her own" derives from `todayMeals` (3 meals, all self-eaten); "↑ 12% this week" is a static string consistent with the mock trend. No new fake data sources.
+
+## 6. Theme
+
+Ported from `tailwind.config.js`:
+
+| Token | Hex | Use |
+|---|---|---|
+| lime | #B9E61A | brand, accent, hero ring, highlights |
+| lime-dark | #7A9A10 | lime text on light bg |
+| ink | #171221 | text, dark surfaces |
+| purple | #2B1F3D | gradients, accents |
+| cream | #FAF7F0 | app background |
+| coral | #FF6B4A | elevated severity, destructive |
+| gold | #F5C518 | moderate severity |
+| teal | #1A9E7A | good severity, success |
+| teal-dark | #0E3D2C | family banner gradient |
+| muted | #5A5A6E | secondary text |
+
+Font: system (SF Pro) — replaces the web's Segoe UI; correct choice on iOS. Cards: white, 20pt corner radius, subtle shadow, hairline border — matching the web's rounded-2xl card language.
+
+## 7. App Icon & Launch
+
+- **Icon:** generated 1024×1024 PNG (PowerShell GDI+ on this PC): lime field, ink wordmark "S" — replaced later by a real logo without code changes (asset catalog swap).
+- **Launch screen:** plain cream background (Info.plist `UILaunchScreen`), portrait only.
+
+## 8. Error Handling
+
+Static demo — no runtime failure modes beyond empty states: alerts empty state (family tab) and no network/permission code exists. Chart code guards against empty arrays defensively.
+
+## 9. Testing & Verification
+
+No unit tests — the app is a static UI demo with no logic to test; on this PC there is no Xcode/Swift toolchain, so **compilation and visual verification happen on your Mac**:
+
+1. `git clone` → open `STEADI.xcodeproj` → iPhone 16 Pro simulator → Cmd+R (no signing needed).
+2. Then on the physical iPhone: plug in, select device, free-provision with a personal Apple ID, Cmd+R.
+3. You report back any build errors/screenshots; I fix and push; you `git pull`.
+
+## 10. Out of Scope
+
+Real auth, backend/sync, Bluetooth, HealthKit, app-store assets, localization, iPad layout, unit/UI tests, Android. The login role-picker is deliberately dropped (tabs cover all three views — better for live demo flow).
