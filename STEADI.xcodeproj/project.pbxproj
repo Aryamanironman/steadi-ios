@@ -29,6 +29,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA00000D000000000000000D = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000002 /* STEADI */,
+				AA0000040000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
 		AA0000040000000000000004 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -37,6 +45,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
 		AA0000050000000000000005 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
@@ -56,7 +67,7 @@
 				en,
 				Base,
 			);
-			mainGroup = AA0000050000000000000005;
+			mainGroup = AA00000D000000000000000D;
 			productRefGroup = AA0000040000000000000004 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -64,14 +75,16 @@
 				AA0000060000000000000006 /* STEADI */,
 			);
 		};
-/* End PBXGroup section */
+/* End PBXProject section */
 
 /* Begin PBXNativeTarget section */
 		AA0000060000000000000006 /* STEADI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA0000080000000000000008 /* Build configuration list for PBXNativeTarget "STEADI" */;
 			buildPhases = (
+				AA00000E000000000000000E /* Sources */,
 				AA0000030000000000000003 /* Frameworks */,
+				AA00000F000000000000000F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -86,6 +99,26 @@
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA00000F000000000000000F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA00000E000000000000000E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		AA0000090000000000000009 /* Debug */ = {
